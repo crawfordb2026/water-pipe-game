@@ -10,6 +10,7 @@ class PipelinePuzzler {
         this.grid = [];
         this.initialGrid = []; // Store initial state for restart
         this.waterFlowActive = false;
+        this.rotationLimits = new Map(); // Track remaining rotations per pipe
         
         // Pipe types and their connections - Fixed with 4 orientations each
         this.pipeTypes = {
@@ -60,6 +61,14 @@ class PipelinePuzzler {
         document.getElementById('restart-btn').addEventListener('click', () => this.restartLevel());
         document.getElementById('next-level-btn').addEventListener('click', () => this.nextLevel());
         document.getElementById('modal-btn').addEventListener('click', () => this.hideModal());
+        
+        // Add new level button
+        const newLevelBtn = document.createElement('button');
+        newLevelBtn.id = 'new-level-btn';
+        newLevelBtn.className = 'game-btn';
+        newLevelBtn.textContent = 'New Level';
+        newLevelBtn.addEventListener('click', () => this.generateNewLevel());
+        document.querySelector('.game-controls').appendChild(newLevelBtn);
     }
     
     createBoard() {
@@ -67,6 +76,7 @@ class PipelinePuzzler {
         board.innerHTML = '';
         this.grid = [];
         this.initialGrid = []; // Reset initial state
+        this.rotationLimits.clear(); // Reset rotation limits
         
         for (let row = 0; row < this.gridSize; row++) {
             this.grid[row] = [];
@@ -98,6 +108,18 @@ class PipelinePuzzler {
                     pipe.className = `pipe ${pipeType}`;
                     cell.appendChild(pipe);
                     
+                    // Set rotation limit for this pipe (2-4 rotations based on level)
+                    const posKey = `${row},${col}`;
+                    const rotationLimit = Math.max(2, 5 - Math.floor(this.currentLevel / 3)); // Harder levels = fewer rotations
+                    this.rotationLimits.set(posKey, rotationLimit);
+                    
+                    // Add rotation counter display
+                    const counter = document.createElement('div');
+                    counter.className = 'rotation-counter';
+                    counter.textContent = rotationLimit;
+                    counter.title = `${rotationLimit} rotations remaining`;
+                    cell.appendChild(counter);
+                    
                     this.grid[row][col] = { type: pipeType, rotation: rotation };
                     this.initialGrid[row][col] = { type: pipeType, rotation: rotation }; // Save initial state
                     
@@ -120,11 +142,25 @@ class PipelinePuzzler {
         const cell = this.grid[row][col];
         if (cell.type === 'source' || cell.type === 'destination') return;
         
+        // Check rotation limit
+        const posKey = `${row},${col}`;
+        const remainingRotations = this.rotationLimits.get(posKey) || 0;
+        
+        if (remainingRotations <= 0) {
+            this.showMessage('🔄 No rotations remaining for this pipe!', 'error');
+            return;
+        }
+        
         // Rotate the pipe 90 degrees clockwise
         cell.rotation = (cell.rotation + 1) % 4;
         
+        // Decrease rotation count
+        this.rotationLimits.set(posKey, remainingRotations - 1);
+        
         // Update visual immediately and reliably
         const pipeElement = document.querySelector(`[data-row="${row}"][data-col="${col}"] .pipe`);
+        const counterElement = document.querySelector(`[data-row="${row}"][data-col="${col}"] .rotation-counter`);
+        
         if (pipeElement) {
             const rotations = this.pipeTypes[cell.type].rotations;
             const newType = rotations[cell.rotation];
@@ -132,10 +168,49 @@ class PipelinePuzzler {
             // Force reflow to ensure immediate visual update
             pipeElement.className = `pipe ${newType}`;
             pipeElement.offsetHeight; // Force reflow
+            
+            // Update counter display
+            if (counterElement) {
+                const newCount = remainingRotations - 1;
+                counterElement.textContent = newCount;
+                counterElement.title = `${newCount} rotations remaining`;
+                
+                // Add visual feedback for low rotations
+                if (newCount === 0) {
+                    counterElement.classList.add('no-rotations');
+                } else if (newCount === 1) {
+                    counterElement.classList.add('low-rotations');
+                }
+            }
         }
         
-        // Check if puzzle is solved with a longer delay to ensure visual update completes
-        setTimeout(() => this.checkConnection(), 150);
+        // Add a longer delay and validate state before checking
+        setTimeout(() => {
+            this.validateGridState();
+            this.checkConnection();
+        }, 300);
+    }
+    
+    validateGridState() {
+        let stateValid = true;
+        
+        for (let row = 0; row < this.gridSize; row++) {
+            for (let col = 0; col < this.gridSize; col++) {
+                const cell = this.grid[row][col];
+                const pipeElement = document.querySelector(`[data-row="${row}"][data-col="${col}"] .pipe`);
+                
+                if (pipeElement && cell.type !== 'source' && cell.type !== 'destination') {
+                    const expectedType = this.pipeTypes[cell.type].rotations[cell.rotation];
+                    const actualClasses = pipeElement.className;
+                    
+                    if (!actualClasses.includes(expectedType)) {
+                        stateValid = false;
+                        // Force fix the visual state
+                        pipeElement.className = `pipe ${expectedType}`;
+                    }
+                }
+            }
+        }
     }
     
     checkConnection() {
@@ -217,12 +292,12 @@ class PipelinePuzzler {
     
     getTJunctionConnections(rotation) {
         const tJunctionConnections = [
-            ['top', 'left', 'right'],    // t-junction (top open)
-            ['top', 'bottom', 'right'],  // t-junction-right (left open)
-            ['left', 'right', 'bottom'], // t-junction-bottom (top open)
-            ['top', 'bottom', 'left']    // t-junction-left (right open)
+            ['top', 'left', 'right'],    // t-junction (rotation 0)
+            ['top', 'bottom', 'right'],  // t-junction-right (rotation 1) 
+            ['left', 'right', 'bottom'], // t-junction-bottom (rotation 2)
+            ['top', 'bottom', 'left']    // t-junction-left (rotation 3)
         ];
-        return tJunctionConnections[rotation];
+        return tJunctionConnections[rotation] || [];
     }
     
     rotateConnections(connections, rotation) {
@@ -295,8 +370,52 @@ class PipelinePuzzler {
         this.updateDisplay();
         this.showMessage('🎉 Level Complete! Water is flowing!', 'success');
         
+        // Trigger celebration animation
+        this.celebrateWin();
+        
         document.getElementById('next-level-btn').style.display = 'inline-block';
         document.getElementById('restart-btn').textContent = 'Replay Level';
+    }
+    
+    celebrateWin() {
+        // Create confetti animation
+        this.createConfetti();
+        
+        // Add water splash effect to the water meter
+        const waterFill = document.getElementById('water-fill');
+        waterFill.style.animation = 'waterSplash 1s ease-out';
+        
+        // Screen celebration effect
+        document.body.style.animation = 'celebrate 0.5s ease-out';
+        
+        // Reset animations after completion
+        setTimeout(() => {
+            waterFill.style.animation = '';
+            document.body.style.animation = '';
+        }, 1000);
+    }
+    
+    createConfetti() {
+        const colors = ['var(--charity-yellow)', 'var(--water-blue)', '#4FC3F7', '#81D4FA', '#FFC20E'];
+        const confettiContainer = document.createElement('div');
+        confettiContainer.className = 'confetti-container';
+        document.body.appendChild(confettiContainer);
+        
+        // Create 50 confetti pieces
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+            confettiContainer.appendChild(confetti);
+        }
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+            document.body.removeChild(confettiContainer);
+        }, 5000);
     }
     
     startGame() {
@@ -342,7 +461,11 @@ class PipelinePuzzler {
     }
     
     resetToInitialState() {
+        // Reset to initial positions instead of creating new level
         const board = document.getElementById('game-board');
+        
+        // Reset rotation limits
+        this.rotationLimits.clear();
         
         for (let row = 0; row < this.gridSize; row++) {
             for (let col = 0; col < this.gridSize; col++) {
@@ -361,6 +484,18 @@ class PipelinePuzzler {
                         const rotations = this.pipeTypes[this.initialGrid[row][col].type].rotations;
                         const initialType = rotations[this.initialGrid[row][col].rotation];
                         pipeElement.className = `pipe ${initialType}`;
+                    }
+                    
+                    // Reset rotation counter
+                    const counterElement = cellElement.querySelector('.rotation-counter');
+                    if (counterElement) {
+                        const posKey = `${row},${col}`;
+                        const rotationLimit = Math.max(2, 5 - Math.floor(this.currentLevel / 3));
+                        this.rotationLimits.set(posKey, rotationLimit);
+                        
+                        counterElement.textContent = rotationLimit;
+                        counterElement.title = `${rotationLimit} rotations remaining`;
+                        counterElement.className = 'rotation-counter'; // Reset all classes
                     }
                 }
             }
@@ -409,6 +544,12 @@ class PipelinePuzzler {
         if (this.timeLeft <= 0) {
             this.restartLevel();
         }
+    }
+    
+    generateNewLevel() {
+        this.currentLevel++;
+        this.createBoard();
+        this.startGame();
     }
 }
 
