@@ -16,7 +16,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, var(--light-gray) 0%, #E8E8E8 100%);
     min-height: 100vh;
     display: flex;
@@ -42,8 +42,72 @@ body {
 .game-header h1 {
     color: var(--dark-blue);
     font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Difficulty Selection */
+.difficulty-selection {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.difficulty-label {
+    font-weight: 600;
+    color: var(--dark-blue);
+    font-size: 1.1rem;
+}
+
+.difficulty-dropdown {
+    font-family: 'Inter', sans-serif;
+    padding: 8px 12px;
+    border: 2px solid var(--charity-yellow);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark-blue);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.difficulty-dropdown:hover {
+    background: var(--charity-yellow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.difficulty-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 194, 14, 0.3);
+}
+
+/* Milestone Messages */
+.milestone-message {
+    background: linear-gradient(135deg, var(--success-green) 0%, #34CE57 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    animation: milestone-appear 0.5s ease-out;
+}
+
+@keyframes milestone-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .game-stats {
@@ -61,7 +125,7 @@ body {
 
 .stat-label {
     display: block;
-    font-weight: bold;
+    font-weight: 600;
     color: var(--dark-blue);
     font-size: 0.9rem;
     margin-bottom: 5px;
@@ -70,7 +134,7 @@ body {
 .stat-value {
     display: block;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--dark-blue);
 }
 
@@ -485,16 +549,65 @@ body {
 }
 
 .educational-footer {
+    background: var(--water-blue);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
     text-align: center;
     margin-top: 30px;
-    padding-top: 20px;
-    border-top: 2px solid var(--charity-yellow);
 }
 
 .educational-message {
-    color: var(--dark-blue);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.charity-links {
+    margin-top: 15px;
+}
+
+.footer-text {
     font-size: 1rem;
-    font-style: italic;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.link-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.charity-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: var(--water-blue);
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.charity-link:hover {
+    background: var(--charity-yellow);
+    color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.donate-link {
+    background: var(--charity-yellow);
+    color: var(--dark-blue);
+}
+
+.donate-link:hover {
+    background: white;
+    color: var(--water-blue);
 }
 
 /* Modal Styles */
@@ -721,15 +834,4 @@ body {
     justify-content: center;
     margin-bottom: 20px;
     flex-wrap: wrap;
-}
-
-#new-level-btn {
-    background: var(--success-green);
-    color: white;
-}
-
-#new-level-btn:hover {
-    background: #218838;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 } 

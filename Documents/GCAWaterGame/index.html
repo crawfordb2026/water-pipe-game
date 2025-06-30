@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pipeline Puzzler - Water Connection Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="game-container">
         <header class="game-header">
             <h1>Pipeline Puzzler</h1>
+            
+            <!-- Difficulty Selection -->
+            <div class="difficulty-selection">
+                <label for="difficulty-select" class="difficulty-label">Difficulty:</label>
+                <select id="difficulty-select" class="difficulty-dropdown">
+                    <option value="easy">Easy</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            
             <div class="game-stats">
                 <div class="stat-item">
                     <span class="stat-label">Time:</span>
@@ -25,6 +39,9 @@
                 </div>
             </div>
         </header>
+
+        <!-- Milestone Messages -->
+        <div id="milestone-message" class="milestone-message" style="display: none;"></div>
 
         <div class="game-board-container">
             <div id="game-board" class="game-board">
@@ -52,6 +69,17 @@
             <p class="educational-message">
                 💧 Did you know? 1 in 10 people lack access to clean water worldwide.
             </p>
+            <div class="charity-links">
+                <p class="footer-text">Learn more about the global water crisis:</p>
+                <div class="link-buttons">
+                    <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer" class="charity-link">
+                        Visit charity: water
+                    </a>
+                    <a href="https://www.charitywater.org/donate/" target="_blank" rel="noopener noreferrer" class="charity-link donate-link">
+                        Donate Now
+                    </a>
+                </div>
+            </div>
         </footer>
     </div>
 
