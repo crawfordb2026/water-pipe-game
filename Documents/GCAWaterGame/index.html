@@ -6,7 +6,7 @@
     <title>Pipeline Puzzler - Water Connection Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,20 +14,20 @@
         <header class="game-header">
             <h1>Pipeline Puzzler</h1>
             
-            <!-- Difficulty Selection -->
-            <div class="difficulty-selection">
-                <label for="difficulty-select" class="difficulty-label">Difficulty:</label>
+            <!-- Difficulty Selector Dropdown -->
+            <div class="difficulty-selector-container">
+                <label for="difficulty-select">Difficulty:</label>
                 <select id="difficulty-select" class="difficulty-dropdown">
-                    <option value="easy">Easy</option>
-                    <option value="normal" selected>Normal</option>
-                    <option value="hard">Hard</option>
+                    <option value="easy">🌊 Easy (90s, 5 rotations)</option>
+                    <option value="normal" selected>💧 Normal (60s, 3 rotations)</option>
+                    <option value="hard">⚡ Hard (30s, 2 rotations)</option>
                 </select>
             </div>
             
             <div class="game-stats">
                 <div class="stat-item">
                     <span class="stat-label">Time:</span>
-                    <span id="timer" class="stat-value">50</span>
+                    <span id="timer" class="stat-value">60</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-label">Score:</span>
@@ -40,8 +40,16 @@
             </div>
         </header>
 
-        <!-- Milestone Messages -->
-        <div id="milestone-message" class="milestone-message" style="display: none;"></div>
+        <!-- Milestone Banner -->
+        <div id="milestone-banner" class="milestone-banner" style="display: none;">
+            <div class="milestone-content">
+                <div class="milestone-icon">🏆</div>
+                <div class="milestone-text">
+                    <h3 id="milestone-title">Achievement Unlocked!</h3>
+                    <p id="milestone-description">You've reached a new milestone!</p>
+                </div>
+            </div>
+        </div>
 
         <div class="game-board-container">
             <div id="game-board" class="game-board">
@@ -66,19 +74,23 @@
         </div>
 
         <footer class="educational-footer">
-            <p class="educational-message">
-                💧 Did you know? 1 in 10 people lack access to clean water worldwide.
-            </p>
-            <div class="charity-links">
-                <p class="footer-text">Learn more about the global water crisis:</p>
-                <div class="link-buttons">
+            <div class="charity-info">
+                <h3>Help Bring Clean Water to the World</h3>
+                <p class="educational-message">
+                    💧 Did you know? 1 in 10 people lack access to clean water worldwide.
+                </p>
+                <div class="charity-links">
                     <a href="https://www.charitywater.org/" target="_blank" rel="noopener noreferrer" class="charity-link">
                         Visit charity: water
                     </a>
-                    <a href="https://www.charitywater.org/donate/" target="_blank" rel="noopener noreferrer" class="charity-link donate-link">
+                    <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener noreferrer" class="charity-link donate-link">
                         Donate Now
                     </a>
                 </div>
+                <p class="disclaimer">
+                    This game is created for educational purposes to raise awareness about the global water crisis. 
+                    Learn more about charity: water's mission to bring clean and safe drinking water to every person on the planet.
+                </p>
             </div>
         </footer>
     </div>
@@ -90,6 +102,19 @@
             <button id="modal-btn" class="game-btn"></button>
         </div>
     </div>
+
+    <!-- Audio elements for sound effects -->
+    <audio id="pipe-rotate-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmgbBSCA0fPTfS8JKYzM8NCJQQ8VaLzs4qBMDAxMoe3ts2MWBziN1+64eSwRKIzD8NuQPQsQYbLq5qtPFAhCnN7zw2oSBR5+zPLPfzMTKILB8N2LPQQKY7bq5Z9AFDpZm9Xgz6wtQigIAI3KwCQEK4PV9NWKMgUofrTm46VCCzFYm9HdyatHCCaA1uvmjDcHTJ7P6Lp3ExNZpd3zxnYrBSmO1/DBfSgKS5nT7a1wLgxFnNvty20bGzmQzvfKhiwKSp3T3rF8IgpKntvv1q8sDkqd3PLBfyMJSp/c4sV7JApLndbwx2wlFEWS1fLZeSIIRpzZ4M5nGQRPp9zxxnAiCkmY1O7TdCIHVqHX7cBpHAVTottyrGkjIlBq1d+OOwgZdrvs6a9PEQdKn97ux2shBkyb3PLKeSwHWJ7T4MF5Kg9Bn9v0z24qCFGd2PLRciMHUp7Y785rGgZVpNbxxXAjBk2Y1e/RdCEGV6DX7cN4KA9AoNvyz3AmCFCc2fHOcSIKVJvY6Np3JgRUndr0wXAnCFme2O/PcyUHUp/Z7MxsGgVYpNfvyXIpBk6Y1e3SdyMGUqBZ78F4KxFAntfyy24nCFCc1vLUeyMGVZ7Y7cpwGARTpNPuw2wdAUSY1+7UeDEEUp/S781xJQpQmtWs3nQpAklnv+LKegkKT6DW8sF1KwdHHJfSxGAcBUqd3u3KFwkRUrAO73BaFBRfodTKcyQmJCVbF7BvKlgNdl8UYo+tl8VfIhVkVHq68MFyJAZOmaOz44xtHgtNm9Tp1Y4xCEaZpnCmRglEjKjU5cR0IRVLpMh7TxBkFHyPyBRcFHKMrdq1U4cS4JOKiTqbzUfECAUqhM7y2Y47CBhqw+3noU4LDU6e4+23XhoFOI/W58p9LAcqg8rx5I5CEhFftdmmsVINGkfFjGZJHQpjjMPcjkQJNljqBGMhIqtWb5DdAJKZKJO7jJwKnOjKAiQUJ2NXX9c3GYk6BAkHEAsBAS6PzcQYRBVeKI5Hl6jRAKhRFIKMLw" type="audio/wav">
+    </audio>
+    
+    <audio id="level-complete-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRpoEAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVYEAACBhY6JZ12lXI6urJe6SyGjFdDbq2keAj+V3PPDcSUGMILR8tiJOgcZZ7zq6p1OEQtQqOLytGUeCDiP1vPMeCsGJHjH8N6PQQcUXrTq66hTFAhGouDxt2kZBSCE0vPOfC4KKIvM8c+KRREZZ7zr6J5REAlQqOPx1mUcBjaP1vPNeSsGJnfH8N2QQAkUXrPq7KhTFQhFoeHw2GkYAyCE0fHQfC0NKYrM8s6MRQ0VaLfn5qJNEwlMouDytVYqDyiC0fHVcjB1KYvF8dZ+NAqWpOLx2w1bvxKdvtrqaLCCK4XH796LO3chZrAz66qfV0kGRZzf8sJoGwFTftHz0ngxCkqW0u7NdSQHSJ/W88JrKQlFm9ryymciBEKR1+jJbywGSqHU9cppJQVXl9fux5QsB1Od2O3MbCcHVJzW6/xnjxcGCJPT6sa5QQP6VJzM7tJ+LQ1Ln9zyzXEjDEuY3O7UeCgIUp/Z6ctxFEuc2e3PcyUITJ/Z7cV0IQdLm9juy20nBkuc2O7PdCMITZnY6st2GAVUnM/vx3YmDkqe2+3LcRsIVJzY7st0HEdKmtnuy3MsBFec2u3TbSUhOJDW98tyJgZMm9Xx1HcnB1Se2OrObygEUqDe78J6GglYn9z0w3UiBEqe3O3Leg4IUpzy0nwtBEuU1fHNeiYGSp3a8M98LAhLm9vyylIGB02czO3QdCUHUJzZ7cxxIQhKnNnu2YUmCFGa2u3KcgYHVJzK7c96IAlMn9zwynoqBkyd3u7SeisEUJzd8sJyJQVKm9z1znUqCE6c2uvJeCQGUpze8sV3JwZOmtfpxm9QBgT5aFBFutOg2xBQAGFVeUCrTKt6sKQGGdXn6eJXP7nKhM/y4W8qBk2d3e7TdyUHTY9atYd4LopJAnyS3O/OeisHUpzc8dJ3KAZOm9jwz2cjB1Gc2evKdCgJTZ7d78tyIQhKnNjuy3AmC1Gc2u7MbCcGUpzb7sp0JgpNnNjuzHcqBE6b3vDPeSgJTpza7sxyJQhLm9ruy3ElCVCc2e7MdSUITZzY7c5yIAhJm9nuy3EkClCd2u7NcyUJT5nY7st0JAhMnNjvzHQjCU6b2e3NcyUJUJvZ68h1JgZMm9ntzHMlCE6b2u7NcyUJTprZ7sx0JAhOm9nuzHQjCU+b2u3NciUJT5vZ7sx0JAhPm9nvznMkCE+a2ezNcyUJUJvZ7Mx0JQdP2EzX7e3NcyUITpvY7cxyJVCP2u7MdCQIcGXX70w=" type="audio/wav">
+    </audio>
+    
+    <audio id="game-over-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmgbBSCA0fPTfS8JKYzM8NCJQQ8VaLzs4qBMDAxMoe3ts2MWBziN1+64eSwRKIzD8NuQPQsQYbLq5qtPFAhCnN7zw2oSBR5+zPLPfzMTKILB8N2LPQQKY7bq5Z9AFDpZm9Xgz6wtQigIAI3KwCQEK4PV9NWKMgUofrTm46VCCzFYm9HdyatHCCaA1uvmjDcHTJ7P6Lp3ExNZpd3zxnYrBSmO1/DBfSgKS5nT7a1wLgxFnNvty20bGzmQzvfKhiwKSp3T3rF8IgpKntvv1q8sDkqd3PLBfyMJSp/c4sV7JApLndbwx2wlFEWS1fLZeSIIRpzZ4M5nGQRPp9zxxnAiCkmY1O7TdCIHVqHX7cBpHAVTottyrGkjIlBq1d+OOwgZdrvs6a9PEQdKn97ux2shBkyb3PLKeSwHWJ7T4MF5Kg9Bn9v0z24qCFGd2PLRciMHUp7Y785rGgZVpNbxxXAjBk2Y1e/RdCEGV6DX7cN4KA9AoNvyz3AmCFCc2fHOcSIKVJvY6Np3JgRUndr0wXAnCFme2O/PcyUHUp/Z7MxsGgVYpNfvyXIpBk6Y1e3SdyMGUqBZ78F4KxFAntfyy24nCFCc1vLUeyMGVZ7Y7cpwGARTpNPuw2wdAUSY1+7UeDEEUp/S781xJQpQmtWs3nQpAklnv+LKegkKT6DW8sF1KwdHHJfSxGAcBUqd3u3KFwkRUrAO73BaFBRfodTKcyQmJCVbF7BvKlgNdl8UYo+tl8VfIhVkVHq68MFyJAZOmaOz44xtHgtNm9Tp1Y4xCEaZpnCmRglEjKjU5cR0IRVLpMh7TxBkFHyPyBRcFHKMrdq1U4cS4JOKiTqbzUfECAUqhM7y2Y47CBhqw+3noU4LDU6e4+23XhoFOI/W58p9LAcqg8rx5I5CEhFftdmmsVINGkfFjGZJHQpjjMPcjkQJNljqBGMhIqtWb5DdAJKZKJO7jJwKnOjKAiQUJ2NXX9c3GYk6BAkHEAsBAS6PzcQYRBVeKI5Hl6jRAKhRFIKMLw" type="audio/wav">
+    </audio>
 
     <script src="script.js"></script>
 </body>

@@ -7,7 +7,6 @@
     --dark-gray: #333;
     --success-green: #28A745;
     --danger-red: #DC3545;
-    --orange-accent: #FF9800;
 }
 
 * {
@@ -17,193 +16,13 @@
 }
 
 body {
-    font-family: 'Source Sans Pro', 'Arial', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, var(--light-gray) 0%, #E8E8E8 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-}
-
-/* Difficulty Dropdown Styles */
-.difficulty-selector-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding: 12px 20px;
-    background: rgba(255, 194, 14, 0.1);
-    border-radius: 8px;
-    border: 2px solid var(--charity-yellow);
-}
-
-.difficulty-selector-container label {
-    font-weight: 600;
-    color: var(--dark-blue);
-    font-size: 1rem;
-}
-
-.difficulty-dropdown {
-    font-family: 'Source Sans Pro', 'Arial', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 8px 12px;
-    border: 2px solid var(--water-blue);
-    border-radius: 6px;
-    background: white;
-    color: var(--dark-blue);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 200px;
-}
-
-.difficulty-dropdown:hover {
-    border-color: var(--dark-blue);
-    box-shadow: 0 2px 8px rgba(0, 123, 192, 0.2);
-}
-
-.difficulty-dropdown:focus {
-    outline: none;
-    border-color: var(--charity-yellow);
-    box-shadow: 0 0 0 3px rgba(255, 194, 14, 0.3);
-}
-
-/* Milestone Banner Styles */
-.milestone-banner {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--charity-yellow), #FFD54F);
-    border: 3px solid var(--water-blue);
-    border-radius: 15px;
-    padding: 20px 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 2000;
-    animation: milestoneSlideIn 0.5s ease-out;
-    max-width: 400px;
-    text-align: center;
-}
-
-.milestone-content {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.milestone-icon {
-    font-size: 2.5rem;
-    animation: bounce 1s infinite;
-}
-
-.milestone-text h3 {
-    color: var(--dark-blue);
-    font-size: 1.3rem;
-    margin: 0 0 5px 0;
-    font-weight: 700;
-}
-
-.milestone-text p {
-    color: var(--dark-blue);
-    font-size: 1rem;
-    margin: 0;
-    font-weight: 400;
-}
-
-@keyframes milestoneSlideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
-
-/* Enhanced Footer Styles */
-.educational-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 30px 20px 20px 20px;
-    border-top: 3px solid var(--charity-yellow);
-    background: linear-gradient(135deg, #F8F9FA, white);
-    border-radius: 15px;
-}
-
-.charity-info h3 {
-    color: var(--water-blue);
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.educational-message {
-    color: var(--dark-blue);
-    font-size: 1.1rem;
-    font-style: italic;
-    margin-bottom: 20px;
-    font-weight: 400;
-}
-
-.charity-links {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.charity-link {
-    display: inline-block;
-    padding: 12px 24px;
-    background: var(--water-blue);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.charity-link:hover {
-    background: var(--dark-blue);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.charity-link.donate-link {
-    background: var(--charity-yellow);
-    color: var(--dark-blue);
-    font-weight: 700;
-}
-
-.charity-link.donate-link:hover {
-    background: #E6AE0D;
-}
-
-.disclaimer {
-    color: var(--dark-gray);
-    font-size: 0.9rem;
-    font-style: normal;
-    line-height: 1.4;
-    margin: 0;
-    opacity: 0.8;
-    font-weight: 300;
 }
 
 .game-container {
@@ -223,9 +42,72 @@ body {
 .game-header h1 {
     color: var(--dark-blue);
     font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    font-weight: 700;
+}
+
+/* Difficulty Selection */
+.difficulty-selection {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.difficulty-label {
+    font-weight: 600;
+    color: var(--dark-blue);
+    font-size: 1.1rem;
+}
+
+.difficulty-dropdown {
+    font-family: 'Inter', sans-serif;
+    padding: 8px 12px;
+    border: 2px solid var(--charity-yellow);
+    border-radius: 8px;
+    background: white;
+    color: var(--dark-blue);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.difficulty-dropdown:hover {
+    background: var(--charity-yellow);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.difficulty-dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 194, 14, 0.3);
+}
+
+/* Milestone Messages */
+.milestone-message {
+    background: linear-gradient(135deg, var(--success-green) 0%, #34CE57 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    animation: milestone-appear 0.5s ease-out;
+}
+
+@keyframes milestone-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .game-stats {
@@ -586,7 +468,7 @@ body {
 
 .water-meter-label {
     text-align: center;
-    font-weight: 600;
+    font-weight: bold;
     color: var(--dark-blue);
     margin-bottom: 10px;
 }
@@ -628,11 +510,10 @@ body {
     border: none;
     border-radius: 8px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Source Sans Pro', 'Arial', sans-serif;
 }
 
 .game-btn:hover {
@@ -648,7 +529,7 @@ body {
 .status-message {
     text-align: center;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: bold;
     min-height: 30px;
     display: flex;
     align-items: center;
@@ -664,6 +545,68 @@ body {
 }
 
 .status-message.info {
+    color: var(--water-blue);
+}
+
+.educational-footer {
+    background: var(--water-blue);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.educational-message {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.charity-links {
+    margin-top: 15px;
+}
+
+.footer-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.link-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.charity-link {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    color: var(--water-blue);
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.charity-link:hover {
+    background: var(--charity-yellow);
+    color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.donate-link {
+    background: var(--charity-yellow);
+    color: var(--dark-blue);
+}
+
+.donate-link:hover {
+    background: white;
     color: var(--water-blue);
 }
 
@@ -695,14 +638,12 @@ body {
     color: var(--dark-blue);
     margin-bottom: 20px;
     font-size: 1.8rem;
-    font-weight: 700;
 }
 
 .modal-content p {
     color: var(--dark-gray);
     margin-bottom: 30px;
     font-size: 1.1rem;
-    font-weight: 400;
 }
 
 /* Timer warning */
@@ -745,20 +686,6 @@ body {
         height: 150px;
         width: 30px;
     }
-    
-    .difficulty-selector-container {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .difficulty-dropdown {
-        min-width: 100%;
-    }
-    
-    .charity-links {
-        flex-direction: column;
-        align-items: center;
-    }
 }
 
 @media (max-width: 480px) {
@@ -794,14 +721,14 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: bold;
     z-index: 10;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 .rotation-counter.low-rotations {
-    background: var(--orange-accent);
+    background: #FF9800;
     color: white;
     animation: pulse-warning 1s infinite;
 }
@@ -907,15 +834,4 @@ body {
     justify-content: center;
     margin-bottom: 20px;
     flex-wrap: wrap;
-}
-
-#new-level-btn {
-    background: var(--success-green);
-    color: white;
-}
-
-#new-level-btn:hover {
-    background: #218838;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 } 
