@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Predictor - Crawford Barnett</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="project-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="project-nav">
+        <div class="nav-container">
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="nav-links">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="project-main">
+        <div class="project-header">
+            <div class="project-icon">📈</div>
+            <h1>Stock Price Predictor</h1>
+            <p class="project-subtitle">Time Series Analysis & Machine Learning for Stock Market Forecasting</p>
+            
+            <div class="project-links">
+                <a href="https://stock-predicter.onrender.com" target="_blank" class="demo-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a href="#" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i> GitHub (Coming Soon)
+                </a>
+            </div>
+        </div>
+
+        <section class="project-overview">
+            <h2>Overview</h2>
+            <p>A comprehensive machine learning project that predicts stock prices using time series analysis and technical indicators. The system fetches historical stock data, engineers meaningful features, and trains multiple ML models to forecast next-day closing prices.</p>
+        </section>
+
+        <section class="key-features">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-database"></i>
+                    <h3>Data Processing</h3>
+                    <p>Automated stock data collection and preprocessing with robust error handling</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Feature Engineering</h3>
+                    <p>Creates 18+ technical indicators including RSI, Bollinger Bands, Moving Averages, Price Momentum, and Volume Trends</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-brain"></i>
+                    <h3>Machine Learning Models</h3>
+                    <p>Implements and compares Linear Regression and Random Forest algorithms</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Evaluation</h3>
+                    <p>Comprehensive model assessment using MSE, MAE, R², and RMSE metrics</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Visualization</h3>
+                    <p>Interactive charts showing actual vs. predicted prices and feature importance analysis</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Real-time Prediction</h3>
+                    <p>Generates next-day price forecasts with confidence intervals</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="technical-implementation">
+            <h2>Technical Implementation</h2>
+            
+            <div class="implementation-section">
+                <h3><i class="fas fa-code"></i> Core Technologies</h3>
+                <ul>
+                    <li>Python for data processing and machine learning</li>
+                    <li>pandas and numpy for data manipulation and numerical computing</li>
+                    <li>scikit-learn for machine learning algorithms and evaluation</li>
+                    <li>yfinance for real-time stock data collection</li>
+                    <li>matplotlib and seaborn for data visualization</li>
+                </ul>
+            </div>
+
+            <div class="implementation-section">
+                <h3><i class="fas fa-chart-line"></i> Machine Learning Techniques</h3>
+                <ul>
+                    <li>Time series analysis with lag features and momentum indicators</li>
+                    <li>Supervised learning with Random Forest and Linear Regression</li>
+                    <li>Feature scaling and normalization for optimal model performance</li>
+                    <li>Cross-validation for robust model evaluation</li>
+                    <li>Feature importance analysis for interpretability</li>
+                </ul>
+            </div>
+
+            <div class="implementation-section">
+                <h3><i class="fas fa-calculator"></i> Technical Indicators</h3>
+                <ul>
+                    <li>RSI (Relative Strength Index) for momentum analysis</li>
+                    <li>Bollinger Bands for volatility and trend identification</li>
+                    <li>Moving Averages (SMA, EMA) for trend analysis</li>
+                    <li>Price momentum and volatility metrics</li>
+                    <li>Volume-based indicators for market sentiment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="algorithms">
+            <h2>Key Algorithms</h2>
+            <div class="algorithm-grid">
+                <div class="algorithm-item">
+                    <h3><i class="fas fa-chart-area"></i> Technical Indicators</h3>
+                    <div class="algorithm-details">
+                        <span class="algorithm-tag">RSI (Relative Strength Index)</span>
+                        <span class="algorithm-tag">Bollinger Bands</span>
+                        <span class="algorithm-tag">Moving Averages</span>
+                    </div>
+                </div>
+                <div class="algorithm-item">
+                    <h3><i class="fas fa-tree"></i> Machine Learning</h3>
+                    <div class="algorithm-details">
+                        <span class="algorithm-tag">Random Forest Regression</span>
+                        <span class="algorithm-tag">Linear Regression</span>
+                        <span class="algorithm-tag">Feature Importance Analysis</span>
+                    </div>
+                </div>
+                <div class="algorithm-item">
+                    <h3><i class="fas fa-clock"></i> Time Series</h3>
+                    <div class="algorithm-details">
+                        <span class="algorithm-tag">Lag Features</span>
+                        <span class="algorithm-tag">Momentum Indicators</span>
+                        <span class="algorithm-tag">Volatility Metrics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="technologies">
+            <h2>Technologies Used</h2>
+            <div class="tech-categories">
+                <div class="tech-category">
+                    <h3>Core Languages</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Data Science Libraries</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">pandas</span>
+                        <span class="tech-tag">numpy</span>
+                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">yfinance</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>Visualization</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">matplotlib</span>
+                        <span class="tech-tag">seaborn</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h3>ML Techniques</h3>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Time Series Analysis</span>
+                        <span class="tech-tag">Supervised Learning</span>
+                        <span class="tech-tag">Feature Engineering</span>
+                        <span class="tech-tag">Cross-Validation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="business-value">
+            <h2>Business Value</h2>
+            <div class="value-grid">
+                <div class="value-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Investment Insights</h3>
+                    <p>Provides data-driven investment insights through quantitative analysis</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Quantitative Analysis</h3>
+                    <p>Demonstrates advanced quantitative analysis and statistical modeling skills</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>End-to-End Pipeline</h3>
+                    <p>Shows complete ML pipeline development from data collection to prediction</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Risk Assessment</h3>
+                    <p>Includes comprehensive risk assessment through volatility and momentum metrics</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="results">
+            <h2>Results & Impact</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Successfully predicts stock price movements with comprehensive model performance tracking</p>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Provides actionable insights for investment decision-making through technical analysis</p>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-code"></i>
+                    <p>Showcases proficiency in data science, machine learning, and financial analysis</p>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-trophy"></i>
+                    <p>Demonstrates software engineering best practices and quantitative finance skills</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="project-footer">
+        <p>Crawford Barnett ©2024</p>
+    </footer>
+</body>
+</html> 
